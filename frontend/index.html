@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Epicure AI - Premium Recommendations</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet"/>
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#1a1c1c",
+                    "inverse-primary": "#6d3bd7",
+                    "tertiary-container": "#928f98",
+                    "on-tertiary-container": "#292930",
+                    "primary-fixed-dim": "#d0bcff",
+                    "error": "#ffb4ab",
+                    "tertiary": "#c8c5ce",
+                    "primary-container": "#a078ff",
+                    "on-error": "#690005",
+                    "on-secondary-container": "#c8abd8",
+                    "on-primary-fixed": "#23005c",
+                    "surface-tint": "#d0bcff",
+                    "on-secondary": "#3d274c",
+                    "primary-fixed": "#e9ddff",
+                    "on-secondary-fixed": "#271236",
+                    "surface-dim": "#121414",
+                    "on-secondary-fixed-variant": "#553d64",
+                    "secondary-fixed": "#f3daff",
+                    "on-tertiary": "#303037",
+                    "inverse-surface": "#e2e2e2",
+                    "surface-container-high": "#282a2b",
+                    "on-error-container": "#ffdad6",
+                    "surface-container": "#1e2020",
+                    "outline-variant": "#494454",
+                    "error-container": "#93000a",
+                    "on-background": "#e2e2e2",
+                    "on-surface": "#e2e2e2",
+                    "on-primary-fixed-variant": "#5516be",
+                    "surface": "#121414",
+                    "tertiary-fixed": "#e4e1ea",
+                    "surface-container-highest": "#333535",
+                    "on-tertiary-fixed": "#1b1b22",
+                    "background": "#121414",
+                    "surface-bright": "#37393a",
+                    "surface-container-lowest": "#0c0f0f",
+                    "secondary-fixed-dim": "#dabcea",
+                    "primary": "#d0bcff",
+                    "tertiary-fixed-dim": "#c8c5ce",
+                    "secondary-container": "#553d64",
+                    "on-primary": "#3c0091",
+                    "on-tertiary-fixed-variant": "#47464d",
+                    "secondary": "#dabcea",
+                    "outline": "#958ea0",
+                    "on-surface-variant": "#cbc3d7",
+                    "inverse-on-surface": "#2f3131",
+                    "surface-variant": "#333535",
+                    "on-primary-container": "#340080"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1440px",
+                    "gutter": "24px",
+                    "lg": "48px",
+                    "margin-desktop": "64px",
+                    "sm": "12px",
+                    "xs": "4px",
+                    "base": "8px",
+                    "margin-mobile": "20px",
+                    "xl": "80px",
+                    "md": "24px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Outfit"],
+                    "display-lg": ["Outfit"],
+                    "headline-md": ["Outfit"],
+                    "headline-lg-mobile": ["Outfit"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg": ["Outfit"]
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+        .glass-panel { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: inset 0 0 20px rgba(255,255,255,0.02); transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-4px); border-color: rgba(208, 188, 255, 0.3);
+            box-shadow: inset 0 0 20px rgba(208,188,255,0.05), 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .ai-border-glow { position: relative; }
+        .ai-border-glow::before {
+            content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1px;
+            background: linear-gradient(45deg, #d0bcff, #a078ff, transparent, #553d64);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor; mask-composite: exclude; opacity: 0.7; animation: borderShimmer 4s linear infinite;
+        }
+        .btn-glow { box-shadow: 0 0 20px rgba(208, 188, 255, 0.2); transition: all 0.3s ease; }
+        .btn-glow:hover { box-shadow: 0 0 30px rgba(208, 188, 255, 0.4); transform: scale(1.02); }
+        @keyframes borderShimmer { 0% { filter: hue-rotate(0deg); } 100% { filter: hue-rotate(360deg); } }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-up { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(208,188,255,0.3); }
+        input[type="radio"]:checked { background-color: #d0bcff; border-color: #d0bcff; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex overflow-hidden selection:bg-primary/30">
+<aside class="w-[320px] h-screen fixed left-0 top-0 overflow-y-auto glass-panel border-r border-white/10 shadow-xl z-20 flex flex-col py-8 px-6">
+    <div class="flex items-center gap-4 mb-10">
+        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary-container flex items-center justify-center shadow-[0_0_15px_rgba(208,188,255,0.3)]">
+            <span class="material-symbols-outlined text-on-primary" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+        </div>
+        <div>
+            <h1 class="font-headline-sm text-2xl font-bold text-primary tracking-tight">Lumina Dining</h1>
+            <p class="font-label-md text-sm text-on-surface-variant opacity-80">Premium Concierge</p>
+        </div>
+    </div>
+    
+    <form id="preferences-form" class="flex flex-col gap-6 flex-1">
+        <div>
+            <label class="block font-label-md text-on-surface-variant mb-2">Location</label>
+            <div class="relative">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant opacity-70">location_on</span>
+                <select id="location" required class="w-full bg-black/20 border border-white/15 rounded-lg py-3 pl-10 pr-4 text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary appearance-none outline-none transition-colors">
+                    <option class="bg-surface-container-high" value="">Loading locations...</option>
+                </select>
+                <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+            </div>
+        </div>
+        
+        <div>
+            <label class="block font-label-md text-on-surface-variant mb-2">Cuisine Preferences</label>
+            <div class="relative">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant opacity-70">ramen_dining</span>
+                <select id="cuisine" class="w-full bg-black/20 border border-white/15 rounded-lg py-3 pl-10 pr-4 text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary appearance-none outline-none transition-colors">
+                    <option class="bg-surface-container-high" value="">Any (Loading...)</option>
+                </select>
+                <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+            </div>
+        </div>
+        
+        <div>
+            <label class="block font-label-md text-on-surface-variant mb-3">Budget Tier</label>
+            <div class="flex gap-3">
+                <label class="flex-1 cursor-pointer">
+                    <input class="peer sr-only" name="budget" type="radio" value="low"/>
+                    <div class="text-center py-2 rounded-md border border-white/15 text-on-surface-variant text-sm peer-checked:border-primary peer-checked:bg-primary/10 peer-checked:text-primary transition-all">Moderate</div>
+                </label>
+                <label class="flex-1 cursor-pointer">
+                    <input checked class="peer sr-only" name="budget" type="radio" value="medium"/>
+                    <div class="text-center py-2 rounded-md border border-white/15 text-on-surface-variant text-sm peer-checked:border-primary peer-checked:bg-primary/10 peer-checked:text-primary transition-all">Premium</div>
+                </label>
+                <label class="flex-1 cursor-pointer">
+                    <input class="peer sr-only" name="budget" type="radio" value="high"/>
+                    <div class="text-center py-2 rounded-md border border-white/15 text-on-surface-variant text-sm peer-checked:border-primary peer-checked:bg-primary/10 peer-checked:text-primary transition-all">Luxury</div>
+                </label>
+            </div>
+        </div>
+        
+        <div>
+            <div class="flex justify-between mb-2">
+                <label class="block font-label-md text-on-surface-variant">Minimum Rating</label>
+                <span id="rating_val" class="font-label-md text-primary">3.5+</span>
+            </div>
+            <input id="min_rating" class="w-full h-1 bg-white/20 rounded-lg appearance-none cursor-pointer accent-primary" max="5" min="0" step="0.1" type="range" value="3.5"/>
+        </div>
+        
+        <div class="flex-1 flex flex-col">
+            <label class="block font-label-md text-on-surface-variant mb-2">Special Requests</label>
+            <textarea id="additional_prefs" class="w-full flex-1 bg-black/20 border border-white/15 rounded-lg p-3 text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors resize-none placeholder:text-on-surface-variant/50" placeholder="E.g., quiet corner table, anniversary celebration..."></textarea>
+        </div>
+        
+        <button id="submit-btn" class="w-full mt-4 bg-gradient-to-r from-primary to-primary-container text-on-primary font-label-md font-bold py-4 rounded-lg flex items-center justify-center gap-2 btn-glow" type="submit">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+            Get Recommendations
+        </button>
+    </form>
+</aside>
+
+<main class="ml-[320px] flex-1 relative h-screen overflow-y-auto">
+    <!-- Shader block simplified for size -->
+    <div class="absolute inset-0 w-full h-full z-0 opacity-[0.15] pointer-events-none" style="background: radial-gradient(circle at 50% 50%, #2a1b4d, #0c0f0f);"></div>
+    
+    <div class="relative z-10 px-16 py-12 max-w-[1440px] mx-auto w-full min-h-full flex flex-col gap-8">
+        <header class="flex justify-between items-end mb-4 animate-fade-up">
+            <div>
+                <h2 class="font-headline-lg text-4xl font-bold text-on-surface mb-2">Curated Experiences</h2>
+                <p class="font-body-lg text-lg text-on-surface-variant">Your personalized culinary journey awaits.</p>
+            </div>
+        </header>
+
+        <!-- Loading State -->
+        <div id="loading-container" class="hidden flex-col items-center justify-center py-20 animate-fade-up">
+            <div class="w-16 h-16 border-4 border-primary/30 border-t-primary rounded-full animate-spin mb-4"></div>
+            <p class="text-on-surface-variant font-body-lg">Consulting our AI Sommelier...</p>
+        </div>
+        
+        <!-- Error State -->
+        <div id="error-container" class="hidden glass-card rounded-xl p-8 border-error/50 bg-error/10 animate-fade-up text-center">
+            <span class="material-symbols-outlined text-error text-4xl mb-2">error</span>
+            <p id="error-message" class="text-error font-body-lg"></p>
+        </div>
+
+        <!-- AI Insights Block -->
+        <div id="ai-insights-container" class="hidden ai-border-glow rounded-xl animate-fade-up delay-100">
+            <div class="glass-card rounded-xl p-8 relative overflow-hidden">
+                <div class="absolute -top-20 -right-20 w-64 h-64 bg-primary/20 rounded-full blur-[80px] pointer-events-none"></div>
+                <div class="flex items-start gap-6 relative z-10">
+                    <div class="w-14 h-14 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">psychology</span>
+                    </div>
+                    <div>
+                        <h3 class="font-headline-sm text-2xl font-semibold text-primary mb-3">AI Insights</h3>
+                        <p id="ai-summary" class="font-body-lg text-lg text-on-surface-variant leading-relaxed"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dynamic Results List -->
+        <div id="results-container" class="flex flex-col gap-6 mt-4">
+            <div class="text-center text-on-surface-variant py-20 text-lg">
+                Enter your preferences on the left and discover your next dining experience.
+            </div>
+        </div>
+        
+        <div class="h-12"></div>
+    </div>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

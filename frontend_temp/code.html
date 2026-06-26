@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Epicure AI - Premium Recommendations</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Outfit:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#1a1c1c",
+                    "inverse-primary": "#6d3bd7",
+                    "tertiary-container": "#928f98",
+                    "on-tertiary-container": "#292930",
+                    "primary-fixed-dim": "#d0bcff",
+                    "error": "#ffb4ab",
+                    "tertiary": "#c8c5ce",
+                    "primary-container": "#a078ff",
+                    "on-error": "#690005",
+                    "on-secondary-container": "#c8abd8",
+                    "on-primary-fixed": "#23005c",
+                    "surface-tint": "#d0bcff",
+                    "on-secondary": "#3d274c",
+                    "primary-fixed": "#e9ddff",
+                    "on-secondary-fixed": "#271236",
+                    "surface-dim": "#121414",
+                    "on-secondary-fixed-variant": "#553d64",
+                    "secondary-fixed": "#f3daff",
+                    "on-tertiary": "#303037",
+                    "inverse-surface": "#e2e2e2",
+                    "surface-container-high": "#282a2b",
+                    "on-error-container": "#ffdad6",
+                    "surface-container": "#1e2020",
+                    "outline-variant": "#494454",
+                    "error-container": "#93000a",
+                    "on-background": "#e2e2e2",
+                    "on-surface": "#e2e2e2",
+                    "on-primary-fixed-variant": "#5516be",
+                    "surface": "#121414",
+                    "tertiary-fixed": "#e4e1ea",
+                    "surface-container-highest": "#333535",
+                    "on-tertiary-fixed": "#1b1b22",
+                    "background": "#121414",
+                    "surface-bright": "#37393a",
+                    "surface-container-lowest": "#0c0f0f",
+                    "secondary-fixed-dim": "#dabcea",
+                    "primary": "#d0bcff",
+                    "tertiary-fixed-dim": "#c8c5ce",
+                    "secondary-container": "#553d64",
+                    "on-primary": "#3c0091",
+                    "on-tertiary-fixed-variant": "#47464d",
+                    "secondary": "#dabcea",
+                    "outline": "#958ea0",
+                    "on-surface-variant": "#cbc3d7",
+                    "inverse-on-surface": "#2f3131",
+                    "surface-variant": "#333535",
+                    "on-primary-container": "#340080"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1440px",
+                    "gutter": "24px",
+                    "lg": "48px",
+                    "margin-desktop": "64px",
+                    "sm": "12px",
+                    "xs": "4px",
+                    "base": "8px",
+                    "margin-mobile": "20px",
+                    "xl": "80px",
+                    "md": "24px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Outfit"],
+                    "display-lg": ["Outfit"],
+                    "headline-md": ["Outfit"],
+                    "headline-lg-mobile": ["Outfit"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg": ["Outfit"]
+            },
+            "fontSize": {
+                    "headline-sm": ["24px", { "lineHeight": "1.3", "fontWeight": "500" }],
+                    "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                    "headline-md": ["32px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                    "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                    "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                    "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                    "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                    "headline-lg": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Custom Animations & Styles */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: inset 0 0 20px rgba(255,255,255,0.02);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(208, 188, 255, 0.3);
+            box-shadow: inset 0 0 20px rgba(208,188,255,0.05), 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .ai-border-glow {
+            position: relative;
+        }
+        .ai-border-glow::before {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(45deg, #d0bcff, #a078ff, transparent, #553d64);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.7;
+            animation: borderShimmer 4s linear infinite;
+        }
+
+        .btn-glow {
+            box-shadow: 0 0 20px rgba(208, 188, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        .btn-glow:hover {
+            box-shadow: 0 0 30px rgba(208, 188, 255, 0.4);
+            transform: scale(1.02);
+        }
+
+        @keyframes borderShimmer {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-up {
+            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(208,188,255,0.3); }
+
+        /* Form overrides */
+        input[type="radio"]:checked {
+            background-color: #d0bcff;
+            border-color: #d0bcff;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex overflow-hidden selection:bg-primary/30">
+<!-- Left Panel: Preference Panel (Adapted from SideNavBar) -->
+<aside class="w-[320px] h-screen fixed left-0 top-0 overflow-y-auto glass-panel border-r border-white/10 shadow-xl z-20 flex flex-col py-8 px-6">
+<!-- Header -->
+<div class="flex items-center gap-4 mb-10">
+<div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary-container flex items-center justify-center shadow-[0_0_15px_rgba(208,188,255,0.3)]">
+<span class="material-symbols-outlined text-on-primary" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary tracking-tight">Epicure AI</h1>
+<p class="font-label-md text-label-md text-on-surface-variant opacity-80">Premium Concierge</p>
+</div>
+</div>
+<!-- Preferences Form -->
+<form class="flex flex-col gap-6 flex-1">
+<!-- Location -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2">Location</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant opacity-70">location_on</span>
+<select class="w-full bg-black/20 border border-white/15 rounded-lg py-3 pl-10 pr-4 text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary appearance-none outline-none transition-colors">
+<option class="bg-surface-container-high text-on-surface" value="delhi">Delhi NCR</option>
+<option class="bg-surface-container-high text-on-surface" value="bangalore">Bangalore</option>
+<option class="bg-surface-container-high text-on-surface" value="mumbai">Mumbai</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Cuisine -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2">Cuisine Preferences</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant opacity-70">ramen_dining</span>
+<select class="w-full bg-black/20 border border-white/15 rounded-lg py-3 pl-10 pr-4 text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary appearance-none outline-none transition-colors">
+<option class="bg-surface-container-high" value="italian">Italian Fine Dining</option>
+<option class="bg-surface-container-high" value="chinese">Contemporary Chinese</option>
+<option class="bg-surface-container-high" value="north_indian">Modern North Indian</option>
+<option class="bg-surface-container-high" value="japanese">Japanese Omakase</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Budget -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-3">Budget Tier</label>
+<div class="flex gap-3">
+<label class="flex-1 cursor-pointer">
+<input class="peer sr-only" name="budget" type="radio" value="low"/>
+<div class="text-center py-2 rounded-md border border-white/15 text-on-surface-variant font-label-md peer-checked:border-primary peer-checked:bg-primary/10 peer-checked:text-primary transition-all">Moderate</div>
+</label>
+<label class="flex-1 cursor-pointer">
+<input checked="" class="peer sr-only" name="budget" type="radio" value="medium"/>
+<div class="text-center py-2 rounded-md border border-white/15 text-on-surface-variant font-label-md peer-checked:border-primary peer-checked:bg-primary/10 peer-checked:text-primary transition-all">Premium</div>
+</label>
+<label class="flex-1 cursor-pointer">
+<input class="peer sr-only" name="budget" type="radio" value="high"/>
+<div class="text-center py-2 rounded-md border border-white/15 text-on-surface-variant font-label-md peer-checked:border-primary peer-checked:bg-primary/10 peer-checked:text-primary transition-all">Luxury</div>
+</label>
+</div>
+</div>
+<!-- Rating Minimum -->
+<div>
+<div class="flex justify-between mb-2">
+<label class="block font-label-md text-label-md text-on-surface-variant">Minimum Rating</label>
+<span class="font-label-md text-label-md text-primary">4.5+</span>
+</div>
+<input class="w-full h-1 bg-white/20 rounded-lg appearance-none cursor-pointer accent-primary" max="5" min="0" step="0.1" type="range" value="4.5"/>
+</div>
+<!-- Additional Details -->
+<div class="flex-1 flex flex-col">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2">Special Requests</label>
+<textarea class="w-full flex-1 bg-black/20 border border-white/15 rounded-lg p-3 text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors resize-none placeholder:text-on-surface-variant/50" placeholder="E.g., quiet corner table, anniversary celebration, vegan options required..."></textarea>
+</div>
+<!-- CTA -->
+<button class="w-full mt-4 bg-gradient-to-r from-primary to-primary-container text-on-primary font-label-md text-label-md py-4 rounded-lg flex items-center justify-center gap-2 btn-glow" type="button">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                Get Recommendations
+            </button>
+</form>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[320px] flex-1 relative h-screen overflow-y-auto">
+<!-- Background Shader Animation -->
+<!-- STITCH_SHADER_START:ANIMATION_1 class="absolute inset-0 w-full h-full z-0 opacity-[0.15] mix-blend-screen pointer-events-none" -->
+<div class="absolute inset-0 w-full h-full z-0 opacity-[0.15] mix-blend-screen pointer-events-none" style="display:block;">
+<canvas id="shader-canvas-ANIMATION_1" style="display:block;width:100%;height:100%"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('shader-canvas-ANIMATION_1');
+
+  // Sync the WebGL drawing-buffer size with the CSS-driven layout size.
+  // This fires on initial layout and whenever the element is resized.
+  function syncSize() {
+    const w = canvas.clientWidth  || 1280;
+    const h = canvas.clientHeight || 720;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width  = w;
+      canvas.height = h;
+    }
+  }
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(syncSize).observe(canvas);
+  }
+  syncSize();
+
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+  const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+  const fs = `precision highp float;
+varying vec2 v_texCoord;
+uniform float u_time;
+uniform vec2 u_resolution;
+
+void main() {
+    vec2 uv = v_texCoord;
+    
+    // Create a slow, flowing dark gradient background
+    float noise = sin(uv.x * 3.0 + u_time * 0.2) * cos(uv.y * 2.0 - u_time * 0.3);
+    vec3 color1 = vec3(0.05, 0.05, 0.1); // Deep Navy
+    vec3 color2 = vec3(0.1, 0.02, 0.15); // Deep Purple
+    vec3 accent = vec3(0.4, 0.1, 0.8);  // Vibrant Purple Accent
+    
+    vec3 finalColor = mix(color1, color2, uv.y + noise * 0.2);
+    finalColor += accent * (0.05 / length(uv - vec2(0.5 + sin(u_time * 0.1) * 0.3, 0.5 + cos(u_time * 0.15) * 0.3)));
+    
+    gl_FragColor = vec4(finalColor, 1.0);
+}`;
+  function cs(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const pos = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uRes = gl.getUniformLocation(prog, 'u_resolution');
+  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+  // u_mouse is in pixel coordinates matching u_resolution (ShaderToy convention).
+  // Shaders that need normalized coords should use: u_mouse / u_resolution.
+  let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+  window.addEventListener('mousemove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width && rect.height) {
+      const nx = (event.clientX - rect.left) / rect.width;
+      const ny = 1.0 - (event.clientY - rect.top) / rect.height;
+      mouse.x = nx * canvas.width;
+      mouse.y = ny * canvas.height;
+    }
+  });
+
+  function render(t) {
+    if (typeof ResizeObserver === 'undefined') syncSize();
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    if (uTime) gl.uniform1f(uTime, t * 0.001);
+    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+    if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  render(0);
+})();
+</script>
+</div>
+<!-- STITCH_SHADER_END:ANIMATION_1 -->
+<!-- Content Container -->
+<div class="relative z-10 px-margin-desktop py-12 max-w-container-max mx-auto w-full min-h-full flex flex-col gap-8">
+<!-- Top App Bar / Title -->
+<header class="flex justify-between items-end mb-4 animate-fade-up">
+<div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface mb-2">Curated Experiences</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Your personalized culinary journey awaits.</p>
+</div>
+<div class="flex gap-4">
+<button class="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+<button class="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</header>
+<!-- AI Insights Block -->
+<div class="ai-border-glow rounded-xl animate-fade-up delay-100">
+<div class="glass-card rounded-xl p-8 relative overflow-hidden">
+<!-- Decorative subtle gradient orb -->
+<div class="absolute -top-20 -right-20 w-64 h-64 bg-primary/20 rounded-full blur-[80px] pointer-events-none"></div>
+<div class="flex items-start gap-6 relative z-10">
+<div class="w-14 h-14 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-primary mb-3">AI Insights</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                                Based on your preferences for <strong class="text-on-surface font-medium">Premium Italian Fine Dining</strong> in <strong class="text-on-surface font-medium">Delhi NCR</strong> with a minimum rating of <strong class="text-on-surface font-medium">4.5</strong>. I have optimized for venues known for exceptional ambiance and authentic regional truffle dishes, avoiding overly crowded spots to ensure a serene experience.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Restaurant List -->
+<div class="flex flex-col gap-6 mt-4">
+<!-- Card 1 -->
+<article class="glass-card rounded-2xl overflow-hidden flex flex-col lg:flex-row animate-fade-up delay-200 group">
+<!-- Image Area -->
+<div class="lg:w-2/5 relative h-64 lg:h-auto shrink-0 overflow-hidden">
+<div class="absolute top-4 left-4 z-10 bg-black/60 backdrop-blur-md border border-white/20 text-white font-label-md px-3 py-1.5 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">emoji_events</span>
+                            #1 Match
+                        </div>
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A high-end, cinematic wide shot of an exclusive Italian fine-dining restaurant interior in Delhi. The scene features dark, moody lighting with warm ambient glows illuminating polished marble tables and plush velvet seating. In the foreground, a beautifully plated, gourmet truffle pasta dish sits elegantly. The aesthetic is luxurious, modern, and aligned with a dark-mode, glassmorphic UI environment, accented by subtle violet undertones in the shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCS_62PWB5XjHM9bonMrSg1R8pJ4AcOOe7qVHEzNfxUeLkGJK4hxVGkheUl2OcYUToR_iWap-WDg8l0U38MzRzf2ap1beCGgl5pnmp2NE-1LmUIO8FVzqDZ2IpfJtYfUoCvW4E62oOV_ImfQoG6wufAnqPak_cc89pjvwLGKPoq0wRvD0q-5CLIe1ZPxerI5aQhyBl0u8hlOXCjB_2yT4by9HCXYDI8PjkY8yBLvyyR6WulGop29P5ChjvHDQRMZE_KNb90M3yVWGw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent lg:bg-gradient-to-r"></div>
+</div>
+<!-- Content Area -->
+<div class="p-8 flex flex-col justify-between flex-1 relative">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-headline-md text-headline-md font-bold text-on-surface">Le Cirque Signature</h4>
+<div class="flex items-center gap-1 bg-surface-container/50 px-3 py-1.5 rounded-md border border-white/5">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md text-on-surface">4.9</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="text-xs font-label-md text-on-surface-variant bg-white/5 border border-white/10 px-2.5 py-1 rounded-md">Italian</span>
+<span class="text-xs font-label-md text-on-surface-variant bg-white/5 border border-white/10 px-2.5 py-1 rounded-md">Fine Dining</span>
+<span class="text-xs font-label-md text-on-surface-variant bg-white/5 border border-white/10 px-2.5 py-1 rounded-md">₹8,000 for two</span>
+<span class="text-xs font-label-md text-on-surface-variant bg-white/5 border border-white/10 px-2.5 py-1 rounded-md flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">location_on</span> Chanakyapuri</span>
+</div>
+<!-- Why this pick -->
+<div class="bg-surface-container-low/40 border border-primary/20 rounded-lg p-4 mb-6">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-sm">auto_awesome</span>
+<span class="font-label-md text-label-md text-primary">Why this pick</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Matches perfectly with your request for authentic truffle dishes. Their seasonal black truffle menu is currently active. The atmosphere is unparalleled for quiet, luxury dining.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="flex-1 bg-white/10 hover:bg-white/15 border border-white/20 text-on-surface font-label-md py-3 rounded-lg transition-colors text-center">View Menu</button>
+<button class="flex-1 bg-primary text-on-primary font-label-md py-3 rounded-lg hover:bg-primary-container transition-colors shadow-[0_0_15px_rgba(208,188,255,0.2)] text-center">Reserve Table</button>
+</div>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="glass-card rounded-2xl overflow-hidden flex flex-col lg:flex-row animate-fade-up delay-300 group">
+<div class="lg:w-2/5 relative h-64 lg:h-auto shrink-0 overflow-hidden">
+<div class="absolute top-4 left-4 z-10 bg-black/60 backdrop-blur-md border border-white/20 text-white font-label-md px-3 py-1.5 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary-container" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+                            #2 Match
+                        </div>
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="An elegant, contemporary European dining room in Delhi captured in a moody, cinematic style. The viewpoint overlooks a flawlessly set table with crystal glassware and abstract, modern plating of a signature Italian dish. The atmosphere is upscale and refined, utilizing a dark color palette enriched with subtle metallic accents and soft, diffuse lighting that evokes a sense of prestige and futuristic luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuArDVvQI3MGMvIc3uRsWp2s30VdOJsvdtJGUkloXDXelozg6vS_YqsDQ9ZOsAUDWBu12CmUMgcL-7h46OerJJ59S7xEoHjD3lUXQwX7u5OcEi4-s3MSEGPTs8UNnhzAbl67YCx1PvAfQGRStdpwShwxnKhDPwefZrfJ3gV2p4JNWApHSQFTjY0P0Y-GBcGKT58atjtWl6z1Fj0oQwOohn5tHrUw2_EBNu_XLWZ2JnmIh4u0Rec7LsdbYtnBAYAfXtbpyL6mK6ilPDM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent lg:bg-gradient-to-r"></div>
+</div>
+<div class="p-8 flex flex-col justify-between flex-1 relative">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-headline-md text-headline-md font-bold text-on-surface">Sorrento</h4>
+<div class="flex items-center gap-1 bg-surface-container/50 px-3 py-1.5 rounded-md border border-white/5">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md text-on-surface">4.7</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="text-xs font-label-md text-on-surface-variant bg-white/5 border border-white/10 px-2.5 py-1 rounded-md">Neapolitan</span>
+<span class="text-xs font-label-md text-on-surface-variant bg-white/5 border border-white/10 px-2.5 py-1 rounded-md">Premium</span>
+<span class="text-xs font-label-md text-on-surface-variant bg-white/5 border border-white/10 px-2.5 py-1 rounded-md">₹5,500 for two</span>
+<span class="text-xs font-label-md text-on-surface-variant bg-white/5 border border-white/10 px-2.5 py-1 rounded-md flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">location_on</span> Connaught Place</span>
+</div>
+<div class="bg-surface-container-low/40 border border-primary/20 rounded-lg p-4 mb-6">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-sm">auto_awesome</span>
+<span class="font-label-md text-label-md text-primary">Why this pick</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Renowned for their artisanal pastas and extensive wine cellar. While slightly more energetic than Le Cirque, the service is impeccable and meets your premium criteria perfectly.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="flex-1 bg-white/10 hover:bg-white/15 border border-white/20 text-on-surface font-label-md py-3 rounded-lg transition-colors text-center">View Menu</button>
+<button class="flex-1 bg-primary text-on-primary font-label-md py-3 rounded-lg hover:bg-primary-container transition-colors shadow-[0_0_15px_rgba(208,188,255,0.2)] text-center">Reserve Table</button>
+</div>
+</div>
+</article>
+</div>
+<!-- Bottom spacing -->
+<div class="h-12"></div>
+</div>
+</main>
+</body></html>
