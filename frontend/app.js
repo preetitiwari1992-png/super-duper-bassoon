@@ -1,4 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Determine API Base URL automatically
+    const API_BASE_URL = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost' 
+        ? 'http://127.0.0.1:8000' 
+        : 'https://super-duper-bassoon-production.up.railway.app'; // Update this to your deployed Railway URL if different
+        
     const locationSelect = document.getElementById('location');
     const cuisineSelect = document.getElementById('cuisine');
     const ratingSlider = document.getElementById('min_rating');
@@ -22,8 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
     async function loadInitialData() {
         try {
             const [locRes, cuisineRes] = await Promise.all([
-                fetch('http://127.0.0.1:8000/api/v1/locations'),
-                fetch('http://127.0.0.1:8000/api/v1/cuisines')
+                fetch(`${API_BASE_URL}/api/v1/locations`),
+                fetch(`${API_BASE_URL}/api/v1/cuisines`)
             ]);
             
             const locations = await locRes.json();
@@ -81,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             let data;
             try {
-                const res = await fetch('http://127.0.0.1:8000/api/v1/recommend', {
+                const res = await fetch(`${API_BASE_URL}/api/v1/recommend`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
